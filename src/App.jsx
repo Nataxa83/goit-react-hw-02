@@ -5,12 +5,14 @@ import Notification from "./components/Notification/Notification";
 import { useState, useEffect } from "react";
 
 export default function App() {
-  const [feedback, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  });
-
+  const [feedback, setFeedback] = useState(
+    () =>
+      JSON.parse(localStorage.getItem("feedback-counter")) || {
+        good: 0,
+        neutral: 0,
+        bad: 0,
+      }
+  );
   const [showFeedback, setShowFeedback] = useState(false);
   const [showReset, setShowReset] = useState(false);
 
@@ -34,6 +36,10 @@ export default function App() {
     setShowFeedback(false);
     setShowReset(false);
   };
+
+  useEffect(() => {
+    localStorage.setItem("feedback-counter", JSON.stringify(feedback));
+  }, [feedback]);
 
   return (
     <>
