@@ -24,7 +24,7 @@ export default function Options({ updateFeedback, resetFeedback, showReset }) {
       >
         Bad
       </button>
-      {showReset && (
+      {showReset > 0 && (
         <button
           className={css.button}
           type="button"

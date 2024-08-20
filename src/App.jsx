@@ -13,14 +13,9 @@ export default function App() {
         bad: 0,
       }
   );
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [showReset, setShowReset] = useState(false);
 
   const updateFeedback = (feedbackType) => {
-    console.log("click", feedbackType);
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
-    setShowFeedback(true);
-    setShowReset(true);
   };
 
   const total = feedback.good + feedback.neutral + feedback.bad;
@@ -32,9 +27,6 @@ export default function App() {
       neutral: 0,
       bad: 0,
     });
-
-    setShowFeedback(false);
-    setShowReset(false);
   };
 
   useEffect(() => {
@@ -47,10 +39,10 @@ export default function App() {
       <Options
         updateFeedback={updateFeedback}
         resetFeedback={resetFeedback}
-        showReset={showReset}
+        showReset={total}
       />
 
-      {!showFeedback ? (
+      {!total ? (
         <Notification />
       ) : (
         <Feedback
